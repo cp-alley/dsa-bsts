@@ -48,19 +48,6 @@ class Node {
     if (this.right) visitedNodes.push(...this.right.dfsPreOrder());
 
     return visitedNodes;
-    // [15, (left node, (left node (left node)))]
-
-    // traverse(node) {
-    //   if (node === null) return;
-    //   console.log(node.val);
-    //   traverse(node.left);
-    //   traverse(node.right);
-    // }
-
-    // base case: pushing this.val
-    // visitedNodes.push(...dfsPreOrder())
-    // return visitedNodes
-
   }
 
   /** dfsInOrder(): Traverse from the invoking node using in-order DFS.
@@ -221,10 +208,11 @@ class BinarySearchTree {
 
   remove(val) {
     // first find the node, if not found return undefined
-    // 0 children
-    // 1 child
-    // 2 child
+    // 0 children - parents.left/right = null
+    // 1 child - parents.left/right to the removed.child
+    // 2 child -
     // root
+
   }
 }
 
