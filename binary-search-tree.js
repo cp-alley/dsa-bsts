@@ -43,11 +43,13 @@ class Node {
   dfsPreOrder() {
     let visitedNodes = [];
 
-    visitedNodes.push(this.value);
+    visitedNodes.push(this.val);
     if (this.left) visitedNodes.push(...this.left.dfsPreOrder());
-    if (this.right) visitedNodes.push(...this.right?.dfsPreOrder());
+    if (this.right) visitedNodes.push(...this.right.dfsPreOrder());
 
     return visitedNodes;
+    // [15, (left node, (left node (left node)))]
+
     // traverse(node) {
     //   if (node === null) return;
     //   console.log(node.val);
@@ -65,14 +67,28 @@ class Node {
   * Returns an array of visited nodes. */
 
   dfsInOrder() {
+    // [left, current, right]
+    let visitedNodes = [];
 
+    if (this.left) visitedNodes.push(...this.left.dfsInOrder());
+    visitedNodes.push(this.val);
+    if (this.right) visitedNodes.push(...this.right.dfsInOrder());
+
+    return visitedNodes;
   }
 
   /** dfsPostOrder(): Traverse from the invoking node using post-order DFS.
   * Returns an array of visited nodes. */
 
   dfsPostOrder() {
+    // [left, right, current]
+    let visitedNodes = [];
 
+    if (this.left) visitedNodes.push(...this.left.dfsPostOrder());
+    if (this.right) visitedNodes.push(...this.right.dfsPostOrder());
+    visitedNodes.push(this.val);
+
+    return visitedNodes;
   }
 
 }
@@ -158,21 +174,38 @@ class BinarySearchTree {
    * Returns an array of visited nodes. */
 
   dfsInOrder() {
-
+    if (this.root === null) return [];
+    return this.root.dfsInOrder();
   }
 
   /** dfsPostOrder(): Traverse the BST using post-order DFS.
    * Returns an array of visited nodes. */
 
   dfsPostOrder() {
-
+    if (this.root === null) return [];
+    return this.root.dfsPostOrder();
   }
 
   /** bfs(): Traverse the BST using BFS.
    * Returns an array of visited nodes. */
 
   bfs() {
+    if (this.root === null) return [];
 
+    let visitedNodes = [];
+    let toVisitQueue = [this.root];
+
+    // [current, left, right, left-left, left-right, right-left, right-right, etc]
+    while (toVisitQueue.length > 0) {
+      let current = toVisitQueue.shift();
+
+      visitedNodes.push(current.val);
+
+      if (current.left) toVisitQueue.push(current.left);
+      if (current.right) toVisitQueue.push(current.right);
+    }
+
+    return visitedNodes;
   }
 
   /** findSuccessorNode(node): Find and return node with next largest value.
@@ -187,7 +220,11 @@ class BinarySearchTree {
    * Returns the removed node. */
 
   remove(val) {
-
+    // first find the node, if not found return undefined
+    // 0 children
+    // 1 child
+    // 2 child
+    // root
   }
 }
 
